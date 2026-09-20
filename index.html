@@ -1,0 +1,412 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cosmic Budget</title><style>:root{--ink:#18204f;--muted:#68708f;--orange:#ff6b35;--cream:#fff8ef;--violet:#302b73;--line:#eee7df}*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font:15px system-ui,sans-serif}.wrap{max-width:980px;margin:auto;padding:28px 18px 50px}.top{display:flex;justify-content:space-between;align-items:center;gap:16px}.brand{display:flex;gap:12px;align-items:center}.mark{width:48px;height:48px;border-radius:14px;background:linear-gradient(145deg,#ff9c42,#f04b28);display:grid;place-items:center;font-size:25px}.eyebrow{font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--muted);margin:0 0 5px}.top h1{margin:0}.tabs{display:flex;gap:8px;border-bottom:1px solid var(--line);margin-top:28px}.tab{border:0;background:none;padding:12px 14px;color:var(--muted);font-weight:700;border-bottom:3px solid transparent;cursor:pointer}.tab.active{color:var(--ink);border-color:var(--orange)}.hero{margin:32px 0 20px;padding:38px;border-radius:26px;background:linear-gradient(120deg,var(--violet),#514a9b);color:#fff;display:flex;justify-content:space-between;align-items:center}.hero h2{font-size:clamp(36px,6vw,62px);line-height:.96;margin:0;letter-spacing:-.06em}.hero h2 span{color:#ffb15f}.sub{color:#dddff4;max-width:420px;line-height:1.5}.score{width:126px;height:126px;border-radius:50%;display:grid;place-items:center;text-align:center;background:linear-gradient(145deg,#ff6b35,#ffb000);font-size:32px;font-weight:800}.score small{display:block;font-size:10px;font-weight:500}.month,.ghost{border:1px solid var(--line);border-radius:10px;padding:9px;background:#fff;color:var(--ink);font:inherit}.calendar-panel{margin-top:12px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:0 18px 45px #372b6b18}.calendar-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.calendar-head button{border:0;background:#fff0e7;color:var(--orange);border-radius:9px;padding:7px 10px;font-weight:800}.month-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.month-chip{border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px;cursor:pointer;color:var(--ink)}.month-chip.selected{background:#fff0e7;border-color:var(--orange);font-weight:800}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card,.panel{background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 16px 45px #372b6b12}.card strong{display:block;font-size:30px;margin:9px 0}.muted{color:var(--muted)}.content{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;margin-top:18px}.content label{display:block;font-size:12px;font-weight:800;margin:16px 0;color:var(--muted)}.content input,.notes-panel textarea{display:block;width:100%;padding:12px;margin-top:7px;border:1px solid var(--line);border-radius:10px;font:inherit;color:var(--ink);background:#fff}.notes-fab{position:fixed;right:22px;bottom:22px;width:54px;height:54px;border:0;border-radius:50%;background:linear-gradient(145deg,#ff9c42,#f04b28);color:#fff;font-size:25px;box-shadow:0 12px 30px #f04b2866;cursor:pointer}.notes-panel{position:fixed;right:22px;bottom:88px;width:min(340px,calc(100% - 44px));background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 20px 55px #372b6b2b;z-index:5}.notes-panel textarea{min-height:130px;resize:vertical}.notes-panel .panelhead{margin-bottom:4px}.notes-panel h3{margin:0}.panelhead{display:flex;justify-content:space-between;align-items:center}.panel h3{margin:0;font-size:20px}.btn{border:0;border-radius:10px;background:var(--orange);color:#fff;padding:11px 14px;font-weight:800;cursor:pointer}.row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}.left{display:flex;gap:10px;align-items:center}.icon{width:34px;height:34px;border-radius:10px;background:#fff0e7;display:grid;place-items:center}.amount{font-weight:800}.up{color:#35a889}.bar{height:8px;background:#f3eee8;border-radius:9px;margin-top:7px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,#ff6b35,#ffb000)}.category{margin:17px 0}.habit{display:flex;gap:18px;align-items:center;margin-top:20px;color:var(--muted);line-height:1.5}.ring{min-width:88px;height:88px;border-radius:50%;border:8px solid #ffb15f;display:grid;place-items:center;text-align:center;color:var(--orange);font-size:25px;font-weight:800}.ring small{display:block;font-size:10px;font-weight:500}.hidden{display:none!important}footer{text-align:center;color:var(--muted);font-size:11px;margin-top:28px}@media(max-width:700px){.grid,.content{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}.hero{padding:26px}.score{width:95px;height:95px;font-size:25px}} </style><main class="wrap"><header class="top"><div class="brand"><div class="mark">$</div><div><p class="eyebrow">PERSONAL FINANCE</p><h1>Cosmic Budget</h1></div></div><div style="display:flex;gap:8px;align-items:center"><label class="muted" for="month">Track month</label><button id="calendarBtn" class="month" onclick="toggleCalendar()"><span id="monthLabel">September 2026</span> ▾</button><button class="ghost" onclick="resetAll()">Reset</button></div></header><div id="calendarPanel" class="calendar-panel hidden"><div class="calendar-head"><b>Choose a month</b><button onclick="toggleCalendar()">Done</button></div><div id="monthGrid" class="month-grid"></div></div><nav class="tabs"><button class="tab active" onclick="show('budget',this)">Budget overview</button><button class="tab" onclick="show('invest',this)">Investments</button><button class="tab" onclick="show('lifetime',this)">Lifetime</button><button class="tab" onclick="show('whatif',this)">What-if</button></nav><section id="budget"><div class="hero"><div><p class="eyebrow" style="color:#ffb15f">MONTHLY SNAPSHOT</p><h2>Make every dollar<br><span>feel intentional.</span></h2><p class="sub">A calm view of income, spending, and what is still available.</p></div><div class="score"><div><span id="score">82</span><small>money health</small></div></div></div><section class="grid"><article class="card"><span class="muted">Available</span><strong id="available">$0</strong><small id="availableNote" class="muted"></small></article><article class="card"><span class="muted">Income</span><strong id="income">$0</strong><button class="ghost" onclick="setIncome()">Edit income</button></article><article class="card"><span class="muted">Spent</span><strong id="spent">$0</strong><small id="spentNote" class="muted"></small></article></section><section class="content"><article class="panel"><div class="panelhead"><h3>Recent activity</h3><button class="btn" onclick="addExpense()">+ Add expense</button></div><div id="activity"></div></article><article class="panel"><h3>Spending by category</h3><div id="cats"></div></article></section></section><section id="invest" class="hidden"><div class="hero"><div><p class="eyebrow" style="color:#ffb15f">WEEKLY MOMENTUM</p><h2>Invest in your<br><span>future self.</span></h2><p class="sub">Keep your weekly habit visible and make progress feel tangible.</p></div><div class="score"><div><span id="totalInvested">$0</span><small>invested so far</small></div></div></div><section class="grid"><article class="card"><span class="muted">Weekly goal</span><strong id="weekly">$0</strong><button class="ghost" onclick="setWeekly()">Edit goal</button></article><article class="card"><span class="muted">This month</span><strong id="monthInvested">$0</strong><small class="muted">logged contributions</small></article><article class="card"><span class="muted">Contributions</span><strong id="count">0</strong><small class="muted">keep the habit going</small></article></section><section class="content"><article class="panel"><div class="panelhead"><h3>Contribution history</h3><button class="btn" onclick="addInvestment()">+ Log contribution</button></div><div id="investments"></div></article><article class="panel"><h3>Your weekly rhythm</h3><div class="habit"><div class="ring"><span id="streak">0</span><small>weeks</small></div><p>Small, consistent contributions can make investing easier to remember.</p></div></article></section></section><section id="lifetime" class="hidden"><div class="hero"><div><p class="eyebrow" style="color:#ffb15f">THE BIG PICTURE</p><h2>Your money<br><span>over time.</span></h2><p class="sub">A lifetime view of every income, expense, and investment you have logged.</p></div><div class="score"><div><span id="lifetimeMonths">0</span><small>months tracked</small></div></div></div><section class="grid"><article class="card"><span class="muted">Total income</span><strong id="lifetimeIncome">$0</strong></article><article class="card"><span class="muted">Total spent</span><strong id="lifetimeSpent">$0</strong></article><article class="card"><span class="muted">Total invested</span><strong id="lifetimeInvested">$0</strong></article></section><section class="content"><article class="panel"><h3>Lifetime balance</h3><div class="category"><div class="panelhead"><span>Remaining after spending</span><b id="lifetimeAvailable">$0</b></div><div class="bar"><i id="lifetimeBar" style="width:0%"></i></div></div></article><article class="panel"><h3>Spending breakdown</h3><div id="lifetimeCats"></div></article></section></section><section id="whatif" class="hidden"><div class="hero"><div><p class="eyebrow" style="color:#ffb15f">DECISION LAB</p><h2>Plan before<br><span>you buy.</span></h2><p class="sub">Test a potential purchase and compare buying now with waiting for more room in your plan.</p></div><div class="score"><div><span>?</span><small>what if</small></div></div></div><section class="content"><article class="panel"><div class="panelhead"><h3>Potential purchase</h3><button class="btn" onclick="checkWhatIf()">Check it</button></div><label class="muted" for="purchaseName">What are you considering?<input id="purchaseName" placeholder="New shoes, concert tickets…"></label><label class="muted" for="purchaseCost">Price<input id="purchaseCost" type="number" min="0" step="0.01" value="100"></label><div id="whatIfResult" class="category"><b>Enter a price to see your options.</b></div></article><article class="panel"><h3>Compare timing</h3><p class="muted">Waiting gives your budget more breathing room without changing your existing entries.</p><div class="row"><span>Buy now</span><button class="ghost" onclick="checkWhatIf(0)">Compare</button></div><div class="row"><span>Wait one week</span><button class="ghost" onclick="checkWhatIf(1)">Compare</button></div><div class="row"><span>Wait one month</span><button class="ghost" onclick="checkWhatIf(4)">Compare</button></div><div id="waitResult" class="muted"></div></article></section></section><footer><p>Your entries stay in this browser.</p><small>This tool is for planning and education only, not financial, investment, or tax advice.</small></footer><button class="notes-fab" onclick="toggleNotes()" aria-label="Open notes">✎</button><div id="notesPanel" class="notes-panel hidden"><div class="panelhead"><h3>Quick notes</h3><button class="ghost" onclick="toggleNotes()">Close</button></div><textarea id="notesText" placeholder="Write a reminder…"></textarea><button class="btn" onclick="saveNotes()">Save note</button><p id="notesSaved" class="muted"></p></div></main><script>const $=id=>document.getElementById(id),fmt=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(n),esc=x=>String(x).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));let selectedMonth=localStorage.getItem('cosmic-budget-month')||'2026-09',s=JSON.parse(localStorage.getItem('cosmic-budget-public')||'null')||{income:3200,weekly:50,tx:[['Rent',1050,'Housing',0,'2026-09'],['Paycheck',3200,'Income',1,'2026-09'],['Groceries',84.5,'Food',0,'2026-09']],inv:[]};s.tx=s.tx||[];s.inv=s.inv||[];function render(){let tx=s.tx.filter(x=>(x[4]||selectedMonth)===selectedMonth),spent=tx.filter(x=>!x[3]).reduce((a,x)=>a+x[1],0),invest=s.inv.reduce((a,x)=>a+x[1],0),mi=s.inv.filter(x=>(x[3]||String(x[2]).slice(0,7))===selectedMonth).reduce((a,x)=>a+x[1],0);$('monthLabel').textContent=new Date(selectedMonth+'-01T12:00:00').toLocaleDateString('en-US',{month:'long',year:'numeric'});$('income').textContent=fmt(s.income);$('spent').textContent=fmt(spent);$('available').textContent=fmt(s.income-spent-mi);$('availableNote').textContent='Available after spending and investing';$('spentNote').textContent=Math.round(spent/Math.max(s.income,1)*100)+'% of income used';$('score').textContent=Math.max(0,Math.round(82-(spent+invest)/Math.max(s.income,1)*20));$('activity').innerHTML=tx.slice().reverse().map(x=>'<div class="row"><div class="left"><div class="icon">'+(x[3]?'↗':'$')+'</div><div><b>'+esc(x[0])+'</b><div class="muted">'+esc(x[2])+'</div></div></div><span class="amount '+(x[3]?'up':'')+'">'+(x[3]?'+':'−')+fmt(x[1])+'</span></div>').join('');$('cats').innerHTML=['Housing','Food','Transport','Fun','Health','Other'].map(c=>{let n=tx.filter(x=>!x[3]&&x[2]===c).reduce((a,x)=>a+x[1],0);return '<div class="category"><div class="panelhead"><span>'+c+'</span><span class="muted">'+fmt(n)+'</span></div><div class="bar"><i style="width:'+Math.min(100,n/Math.max(s.income,1)*100)+'%"></i></div></div>'}).join('');$('totalInvested').textContent=fmt(invest);$('weekly').textContent=fmt(s.weekly);$('monthInvested').textContent=fmt(mi);$('count').textContent=s.inv.length;$('streak').textContent=Math.min(s.inv.length,52);$('investments').innerHTML=s.inv.slice().reverse().map(x=>'<div class="row"><div><b>'+esc(x[0])+'</b><div class="muted">'+new Date(x[2]).toLocaleDateString()+'</div></div><span class="amount">'+fmt(x[1])+'</span></div>').join('')||'<p class="muted">No contributions logged yet — choose + Log contribution.</p>'}function renderLifetime(){let income=s.income,spent=s.tx.filter(x=>!x[3]).reduce((a,x)=>a+x[1],0),invested=s.inv.reduce((a,x)=>a+x[1],0),months=new Set(s.tx.map(x=>x[4]||'unknown'));$('lifetimeIncome').textContent=fmt(income);$('lifetimeSpent').textContent=fmt(spent);$('lifetimeInvested').textContent=fmt(invested);$('lifetimeAvailable').textContent=fmt(income-spent-invested);$('lifetimeMonths').textContent=months.size;$('lifetimeBar').style.width=Math.min(100,Math.max(0,(income-spent)/Math.max(income,1)*100))+'%';let cats=['Housing','Food','Transport','Fun','Health','Other'];$('lifetimeCats').innerHTML=cats.map(c=>{let n=s.tx.filter(x=>!x[3]&&x[2]===c).reduce((a,x)=>a+x[1],0);return '<div class="category"><div class="panelhead"><span>'+c+'</span><span class="muted">'+fmt(n)+'</span></div><div class="bar"><i style="width:'+Math.min(100,n/Math.max(spent,1)*100)+'%"></i></div></div>'}).join('')}function renderCalendar(){let base=new Date(selectedMonth+'-01T12:00:00'),months=[];for(let i=-2;i<=3;i++){let d=new Date(base.getFullYear(),base.getMonth()+i,1),m=d.toISOString().slice(0,7);months.push('<button class="month-chip '+(m===selectedMonth?'selected':'')+'" data-month="'+m+'" onclick="setMonth(this.dataset.month)">'+d.toLocaleDateString('en-US',{month:'short',year:'numeric'})+'</button>')}$('monthGrid').innerHTML=months.join('')}function toggleCalendar(){$('calendarPanel').classList.toggle('hidden');renderCalendar()}function setMonth(m){selectedMonth=m;localStorage.setItem('cosmic-budget-month',m);render();renderLifetime();renderCalendar();$('calendarPanel').classList.add('hidden')}function save(){localStorage.setItem('cosmic-budget-public',JSON.stringify(s));render();renderLifetime()}function show(id,b){document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');['budget','invest','lifetime','whatif'].forEach(x=>$(x).classList.toggle('hidden',x!==id))}function checkWhatIf(weeks=0){let cost=Number($('purchaseCost').value)||0,name=$('purchaseName').value||'This purchase',tx=s.tx.filter(x=>(x[4]||selectedMonth)===selectedMonth),spent=tx.filter(x=>!x[3]).reduce((a,x)=>a+x[1],0),invest=s.inv.filter(x=>(x[3]||String(x[2]).slice(0,7))===selectedMonth).reduce((a,x)=>a+x[1],0),now=s.income-spent-invest,extra=(s.income/4)*weeks,after=now+extra-cost,word=after>=0?'fits your plan':'would put you over plan';$('whatIfResult').innerHTML='<b>'+esc(name)+' '+(cost?fmt(cost):'')+' '+word+'.</b><p class="muted">Available '+(weeks?'after waiting '+weeks+' week'+(weeks===1?'':'s'):'today')+': '+fmt(now+extra)+'. After buying: '+fmt(after)+'.</p>';$('waitResult').textContent=weeks?('Waiting '+weeks+' week'+(weeks===1?'':'s')+' changes the result to '+fmt(after)+'.'):'Buying now leaves '+fmt(now-cost)+'.'}function toggleNotes(){$('notesPanel').classList.toggle('hidden');if(!$('notesPanel').classList.contains('hidden'))$('notesText').value=localStorage.getItem('cosmic-budget-notes')||''}function saveNotes(){localStorage.setItem('cosmic-budget-notes',$('notesText').value);$('notesSaved').textContent='Saved on this device.'}function setIncome(){let n=prompt('Monthly income',s.income);if(n!==null&&Number(n)>=0){s.income=Number(n);save()}}function setWeekly(){let n=prompt('Weekly investment goal',s.weekly);if(n!==null&&Number(n)>=0){s.weekly=Number(n);save()}}function addExpense(){let d=prompt('Expense name');if(!d)return;let n=Number(prompt('Amount'));if(!n)return;let c=prompt('Category','Food')||'Other';s.tx.push([d,n,c,0,selectedMonth]);save()}function addInvestment(){let d=prompt('Account or goal','Index fund');if(!d)return;let n=Number(prompt('Contribution amount',s.weekly));if(!n)return;s.inv.push([d,n,new Date().toISOString(),selectedMonth]);save()}function resetAll(){if(confirm('Reset this month?')){s={income:0,weekly:0,tx:[],inv:[]};save()}}render();renderLifetime();renderCalendar();</script>
+
+<style>
+.notes-fab{font-size:0}
+.notes-fab::after{content:'✎';font-size:25px;display:block;transform:rotate(-12deg)}
+.edit-btn{padding:7px 10px;font-size:12px;margin-left:10px}
+dialog{border:0;border-radius:22px;padding:0;box-shadow:0 25px 80px #17163c55}
+dialog::backdrop{background:#17163c66}
+dialog form{min-width:min(380px,calc(100vw - 40px));padding:24px}
+dialog h3{margin:0 0 4px;font-size:22px}
+dialog label{display:block;font-size:12px;font-weight:800;color:var(--muted);margin:14px 0}
+dialog input{display:block;width:100%;padding:12px;margin-top:7px;border:1px solid var(--line);border-radius:10px;font:inherit;color:var(--ink)}
+dialog menu{display:flex;justify-content:flex-end;gap:10px;padding:0;margin:22px 0 0}
+</style>
+<dialog id="expenseDialog">
+<form onsubmit="saveExpense(event)">
+<p class="eyebrow">BUDGET ACTIVITY</p>
+<h3 id="expenseDialogTitle">Add expense</h3>
+<label>Activity name<input id="expenseName" required placeholder="Groceries, rent, gas…"></label>
+<label>Amount<input id="expenseAmount" required type="number" min="0.01" step="0.01" placeholder="25.00"></label>
+<label>Suggested category<input id="expenseCategory" readonly></label>
+<input id="expenseIndex" type="hidden">
+<menu>
+<button type="button" class="ghost" onclick="$('expenseDialog').close()">Cancel</button>
+<button type="submit" class="btn">Save activity</button>
+</menu>
+</form>
+</dialog>
+<script>
+(function(){
+function categoryFor(name){let n=name.toLowerCase();if(/rent|mortgage|home|housing/.test(n))return'Housing';if(/grocery|groceries|food|restaurant|coffee|lunch|dinner/.test(n))return'Food';if(/gas|fuel|uber|lyft|bus|train|parking/.test(n))return'Transport';if(/movie|game|concert|fun|hobby|shopping/.test(n))return'Fun';if(/doctor|medical|medicine|pharmacy|health/.test(n))return'Health';return'Other'}
+window.openExpense=function(i){i=i===undefined?-1:i;$('expenseDialogTitle').textContent=i<0?'Add expense':'Edit activity';$('expenseIndex').value=i;$('expenseName').value=i<0?'':s.tx[i][0];$('expenseAmount').value=i<0?'':s.tx[i][1];$('expenseCategory').value=i<0?'Other':s.tx[i][2];$('expenseDialog').showModal()};
+window.saveExpense=function(e){e.preventDefault();let i=Number($('expenseIndex').value),d=$('expenseName').value.trim(),n=Number($('expenseAmount').value),c=$('expenseCategory').value||categoryFor(d);if(!d||!n)return;if(i>=0)s.tx[i]=[d,n,c,0,s.tx[i][4]||selectedMonth];else s.tx.push([d,n,c,0,selectedMonth]);$('expenseDialog').close();save()};
+addExpense=openExpense;
+$('expenseName').addEventListener('input',e=>{$('expenseCategory').value=categoryFor(e.target.value)});
+let oldRender=render;
+render=function(){oldRender();document.querySelectorAll('#activity .row').forEach((row,i)=>{let tx=s.tx.filter(x=>(x[4]||selectedMonth)===selectedMonth).filter(x=>!x[3]).slice().reverse()[i];if(!tx)return;let b=document.createElement('button');b.className='ghost edit-btn';b.textContent='Edit';b.onclick=()=>openExpense(s.tx.indexOf(tx));row.appendChild(b)})};
+render();
+})();
+</script>
+
+<script id="liquidFinalRepair">
+  (function () {
+    /* The settings module is created late in the original prototype, so finish wiring it after every section exists. */
+    if (typeof s !== 'undefined') {
+      s.recurring = s.recurring || [];
+      s.goal = s.goal || {};
+      s.limit = Number(s.limit || 0);
+    }
+    var preferences = document.querySelector('#settings .settings-tools .panel');
+    if (preferences && !document.querySelector('#liquidIntensity')) {
+      var control = document.createElement('div');
+      control.className = 'liquid-control';
+      control.innerHTML = '<div class="liquid-control-head"><b>Liquid Glass</b><span id="liquidIntensityValue" class="liquid-value">70%</span></div><p class="muted">Adjust how soft, frosted, and translucent the interface feels.</p><input id="liquidIntensity" type="range" min="0" max="100" value="70" aria-label="Liquid Glass intensity"><div class="liquid-range-labels"><span>Subtle</span><span>More liquid</span></div>';
+      preferences.appendChild(control);
+      var range = control.querySelector('#liquidIntensity');
+      var value = control.querySelector('#liquidIntensityValue');
+      var saved = Number(localStorage.getItem('cosmic-budget-liquid-intensity'));
+      if (Number.isFinite(saved)) range.value = Math.max(0, Math.min(100, saved));
+      range.oninput = function () {
+        var intensity = Number(range.value);
+        document.documentElement.style.setProperty('--liquid-blur', (10 + intensity * .2) + 'px');
+        document.documentElement.style.setProperty('--liquid-alpha', (.26 + intensity * .0032));
+        document.documentElement.style.setProperty('--liquid-shadow', (.08 + intensity * .0011));
+        value.textContent = intensity + '%';
+        localStorage.setItem('cosmic-budget-liquid-intensity', String(intensity));
+      };
+      range.oninput();
+    }
+    var settingsButton = document.querySelector('#liquidSettingsButton');
+    if (settingsButton) settingsButton.onclick = function () {
+      ['budget','invest','lifetime','whatif','settings'].forEach(function (id) { var section = document.getElementById(id); if (section) section.classList.toggle('hidden', id !== 'settings'); });
+      document.querySelectorAll('.tab').forEach(function (tab) { tab.classList.remove('active'); });
+      var settingsTab = document.getElementById('settingsTab');
+      if (settingsTab) settingsTab.classList.add('active');
+      var profile = document.querySelector('.liquid-profile-card');
+      if (profile) profile.classList.add('hidden');
+      settingsButton.classList.add('active');
+      var profileButton = document.querySelector('#liquidProfileButton');
+      if (profileButton) profileButton.classList.remove('active');
+      if (typeof updateSettings === 'function') updateSettings();
+      window.scrollTo({top:0, behavior:'smooth'});
+    };
+  })();
+</script>
+
+<style id="liquidGlassPrototypeStyles">
+  /* Local-only liquid glass prototype layer. Nothing here is published. */
+  body.liquid-glass {
+    isolation: isolate;
+    background:
+      radial-gradient(circle at 8% 8%, rgba(255, 173, 96, .28), transparent 30%),
+      radial-gradient(circle at 92% 12%, rgba(84, 76, 171, .22), transparent 34%),
+      linear-gradient(135deg, #f9f5ff 0%, #fff8f0 48%, #f1efff 100%);
+  }
+  body.liquid-glass::before {
+    content: "";
+    position: fixed;
+    inset: -18%;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 20% 25%, rgba(255, 126, 67, .14), transparent 22%),
+      radial-gradient(circle at 78% 68%, rgba(79, 71, 154, .14), transparent 25%);
+    filter: blur(var(--liquid-blur, 24px));
+  }
+  body.liquid-glass .panel,
+  body.liquid-glass .card,
+  body.liquid-glass .summary-card,
+  body.liquid-glass .calendar-panel,
+  body.liquid-glass .daily-calendar,
+  body.liquid-glass .notes-panel,
+  body.liquid-glass .side-toolbar,
+  body.liquid-glass .phase3-outlook,
+  body.liquid-glass .settings-tools .panel {
+    background: rgba(255, 255, 255, var(--liquid-alpha, .48)) !important;
+    border: 1px solid rgba(255, 255, 255, .76) !important;
+    box-shadow: 0 22px 60px rgba(53, 43, 112, var(--liquid-shadow, .14)), inset 0 1px 0 rgba(255,255,255,.88) !important;
+    backdrop-filter: blur(var(--liquid-blur, 22px)) saturate(140%);
+    -webkit-backdrop-filter: blur(var(--liquid-blur, 22px)) saturate(140%);
+  }
+  body.liquid-glass .hero {
+    background: linear-gradient(135deg, rgba(48, 43, 115, .88), rgba(87, 77, 161, .62)) !important;
+    border: 1px solid rgba(255,255,255,.28) !important;
+    box-shadow: 0 26px 70px rgba(43, 36, 105, .24), inset 0 1px 0 rgba(255,255,255,.24) !important;
+    backdrop-filter: blur(22px) saturate(135%);
+    -webkit-backdrop-filter: blur(22px) saturate(135%);
+  }
+  body.liquid-glass .mark,
+  body.liquid-glass .hero-orbit,
+  body.liquid-glass .score,
+  body.liquid-glass .notes-fab {
+    border: 1px solid rgba(255,255,255,.46) !important;
+    box-shadow: 0 14px 32px rgba(255, 101, 44, .26), inset 0 1px 0 rgba(255,255,255,.42) !important;
+  }
+  body.liquid-glass input,
+  body.liquid-glass select,
+  body.liquid-glass textarea,
+  body.liquid-glass button,
+  body.liquid-glass .ghost,
+  body.liquid-glass .month,
+  body.liquid-glass .month-chip {
+    border-radius: 16px;
+  }
+  body.liquid-glass input,
+  body.liquid-glass select,
+  body.liquid-glass textarea {
+    background: rgba(255,255,255,.54) !important;
+    border-color: rgba(255,255,255,.86) !important;
+    box-shadow: inset 0 1px 3px rgba(62,45,112,.05), 0 5px 18px rgba(57,45,107,.06);
+  }
+  body.liquid-glass .ghost,
+  body.liquid-glass .month,
+  body.liquid-glass .month-chip {
+    background: rgba(255,255,255,.42) !important;
+    border-color: rgba(255,255,255,.72) !important;
+    box-shadow: 0 8px 20px rgba(57,45,107,.07), inset 0 1px 0 rgba(255,255,255,.72);
+  }
+  body.liquid-glass .primary,
+  body.liquid-glass .btn,
+  body.liquid-glass .notes-fab {
+    background: linear-gradient(135deg, #ff914c, #ff5b32) !important;
+    box-shadow: 0 13px 26px rgba(255, 96, 44, .25), inset 0 1px 0 rgba(255,255,255,.38) !important;
+  }
+  body.liquid-glass .row,
+  body.liquid-glass .transaction,
+  body.liquid-glass .category,
+  body.liquid-glass .phase3-metric {
+    border-radius: 18px;
+    border-color: rgba(255,255,255,.62) !important;
+    background: rgba(255,255,255,.28) !important;
+  }
+  body.liquid-glass .tab.active {
+    border-radius: 999px;
+    background: rgba(255,255,255,.48) !important;
+    box-shadow: 0 8px 22px rgba(57,45,107,.09), inset 0 1px 0 rgba(255,255,255,.8);
+  }
+  body.liquid-glass .phase3-outlook {
+    background: linear-gradient(135deg, rgba(255,255,255,.6), rgba(255,236,218,.46)) !important;
+  }
+  .liquid-prototype-badge {
+    position: fixed;
+    right: 18px;
+    top: 16px;
+    z-index: 50;
+    padding: 9px 13px;
+    border: 1px solid rgba(255,255,255,.78);
+    border-radius: 999px;
+    color: #393273;
+    background: rgba(255,255,255,.46);
+    box-shadow: 0 10px 26px rgba(57,45,107,.12), inset 0 1px 0 rgba(255,255,255,.85);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    font: 800 10px/1 system-ui, sans-serif;
+    letter-spacing: .12em;
+  }
+  @media (max-width: 700px) {
+    .liquid-prototype-badge { right: 12px; top: 10px; font-size: 9px; }
+  }
+</style>
+<script>
+  (function () {
+    document.body.classList.add('liquid-glass');
+    var badge = document.createElement('div');
+    badge.className = 'liquid-prototype-badge';
+    badge.textContent = 'PRIVATE PROTOTYPE';
+    document.body.appendChild(badge);
+  })();
+</script>
+
+<style id="liquidGlassControlsStyles">
+  .liquid-control {
+    margin-top: 18px;
+    padding: 16px;
+    border: 1px solid rgba(255,255,255,.72);
+    border-radius: 20px;
+    background: rgba(255,255,255,.28);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.7);
+  }
+  .liquid-control-head { display:flex; justify-content:space-between; gap:12px; align-items:center; }
+  .liquid-control-head b { font-size: 14px; }
+  .liquid-value { color:#e55a2e; font-weight:800; }
+  .liquid-control p { margin:5px 0 12px; }
+  .liquid-control input[type="range"] {
+    width:100%;
+    height:8px;
+    padding:0;
+    margin:0;
+    accent-color:#ff6b35;
+    cursor:pointer;
+  }
+  .liquid-range-labels { display:flex; justify-content:space-between; margin-top:7px; font-size:11px; color:var(--muted); }
+</style>
+<script>
+  (function () {
+    var preferences = document.querySelector('#settings .settings-tools .panel');
+    if (!preferences || document.querySelector('#liquidIntensity')) return;
+    var control = document.createElement('div');
+    control.className = 'liquid-control';
+    control.innerHTML = '<div class="liquid-control-head"><b>Liquid Glass</b><span id="liquidIntensityValue" class="liquid-value">70%</span></div><p class="muted">Adjust how soft, frosted, and translucent the interface feels.</p><input id="liquidIntensity" type="range" min="0" max="100" value="70" aria-label="Liquid Glass intensity"><div class="liquid-range-labels"><span>Subtle</span><span>More liquid</span></div>';
+    preferences.appendChild(control);
+    var range = control.querySelector('#liquidIntensity');
+    var value = control.querySelector('#liquidIntensityValue');
+    var saved = Number(localStorage.getItem('cosmic-budget-liquid-intensity'));
+    if (Number.isFinite(saved)) range.value = Math.max(0, Math.min(100, saved));
+    function apply() {
+      var intensity = Number(range.value);
+      var blur = 10 + intensity * .2;
+      var alpha = .26 + intensity * .0032;
+      var shadow = .08 + intensity * .0011;
+      document.documentElement.style.setProperty('--liquid-blur', blur + 'px');
+      document.documentElement.style.setProperty('--liquid-alpha', alpha);
+      document.documentElement.style.setProperty('--liquid-shadow', shadow);
+      value.textContent = intensity + '%';
+      localStorage.setItem('cosmic-budget-liquid-intensity', String(intensity));
+    }
+    range.addEventListener('input', apply);
+    apply();
+  })();
+</script>
+
+<style id="liquidSideRailStyles">
+  .liquid-side-rail {
+    position: fixed;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 40;
+    width: 150px;
+    padding: 12px;
+    border: 1px solid rgba(255,255,255,.76);
+    border-radius: 26px;
+    background: rgba(255,255,255,.42);
+    box-shadow: 0 20px 55px rgba(53,43,112,.15), inset 0 1px 0 rgba(255,255,255,.82);
+    backdrop-filter: blur(var(--liquid-blur, 22px)) saturate(145%);
+    -webkit-backdrop-filter: blur(var(--liquid-blur, 22px)) saturate(145%);
+  }
+  .liquid-side-rail-label { padding: 5px 9px 10px; color: var(--muted); font-size: 10px; font-weight: 900; letter-spacing: .14em; }
+  .liquid-side-button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 4px 0;
+    padding: 11px 10px;
+    border: 1px solid transparent;
+    border-radius: 16px;
+    background: transparent;
+    color: var(--ink);
+    font: 800 13px system-ui, sans-serif;
+    cursor: pointer;
+    text-align: left;
+  }
+  .liquid-side-button:hover, .liquid-side-button.active {
+    border-color: rgba(255,255,255,.8);
+    background: rgba(255,255,255,.58);
+    box-shadow: 0 8px 20px rgba(53,43,112,.1), inset 0 1px 0 rgba(255,255,255,.8);
+  }
+  .liquid-side-icon { width: 26px; height: 26px; display:grid; place-items:center; border-radius: 10px; background: linear-gradient(135deg,#ff934c,#ff6033); color:#fff; font-size:13px; }
+  .liquid-profile-card {
+    position: fixed;
+    left: 184px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 39;
+    width: min(300px, calc(100vw - 220px));
+    padding: 22px;
+    border: 1px solid rgba(255,255,255,.78);
+    border-radius: 24px;
+    background: rgba(255,255,255,.58);
+    box-shadow: 0 24px 65px rgba(53,43,112,.18), inset 0 1px 0 rgba(255,255,255,.84);
+    backdrop-filter: blur(var(--liquid-blur, 22px)) saturate(145%);
+    -webkit-backdrop-filter: blur(var(--liquid-blur, 22px)) saturate(145%);
+  }
+  .liquid-profile-card h3 { margin: 0 0 4px; }
+  .liquid-profile-card label { display:block; margin-top:14px; color:var(--muted); font-size:12px; font-weight:800; }
+  .liquid-profile-card input { width:100%; margin-top:6px; padding:10px; }
+  @media(max-width:900px){ .liquid-side-rail{left:10px;width:58px;padding:8px}.liquid-side-rail-label,.liquid-side-button span:last-child{display:none}.liquid-side-button{justify-content:center;padding:10px}.liquid-profile-card{left:78px;width:min(280px,calc(100vw - 96px))} }
+  @media(max-width:700px){ .liquid-side-rail{top:auto;bottom:14px;left:50%;transform:translateX(-50%);width:auto;display:flex;gap:4px;border-radius:22px}.liquid-side-rail-label{display:none}.liquid-side-button{width:auto;margin:0}.liquid-profile-card{left:12px;right:12px;bottom:82px;top:auto;transform:none;width:auto} }
+</style>
+<script>
+  (function () {
+    if (document.querySelector('.liquid-side-rail')) return;
+    var rail = document.createElement('aside');
+    rail.className = 'liquid-side-rail';
+    rail.innerHTML = '<div class="liquid-side-rail-label">ACCOUNT</div><button class="liquid-side-button active" id="liquidProfileButton"><i class="liquid-side-icon">♙</i><span>Profile</span></button><button class="liquid-side-button" id="liquidSettingsButton"><i class="liquid-side-icon">⚙</i><span>Settings</span></button>';
+    document.body.appendChild(rail);
+    var profile = document.createElement('section');
+    profile.className = 'liquid-profile-card hidden';
+    profile.innerHTML = '<h3>Your space</h3><p class="muted">Keep a few personal details with your private budget.</p><label>Display name<input id="liquidProfileName" placeholder="What should we call you?"></label><label>Avatar initials<input id="liquidProfileInitials" maxlength="3" placeholder="MB"></label><button class="btn" id="liquidSaveProfile">Save profile</button>';
+    document.body.appendChild(profile);
+    var profileButton = rail.querySelector('#liquidProfileButton');
+    var settingsButton = rail.querySelector('#liquidSettingsButton');
+    var settingsTab = document.querySelector('#settingsTab');
+    var profileData = JSON.parse(localStorage.getItem('cosmic-budget-profile') || '{}');
+    profile.querySelector('#liquidProfileName').value = profileData.name || '';
+    profile.querySelector('#liquidProfileInitials').value = profileData.initials || '';
+    profileButton.onclick = function () { profile.classList.toggle('hidden'); profileButton.classList.add('active'); settingsButton.classList.remove('active'); };
+    settingsButton.onclick = function () { profile.classList.add('hidden'); profileButton.classList.remove('active'); settingsButton.classList.add('active'); if (settingsTab) settingsTab.click(); };
+    profile.querySelector('#liquidSaveProfile').onclick = function () { localStorage.setItem('cosmic-budget-profile', JSON.stringify({name:profile.querySelector('#liquidProfileName').value.trim(), initials:profile.querySelector('#liquidProfileInitials').value.trim().toUpperCase()})); profile.classList.add('hidden'); };
+  })();
+</script>
+
+<style id="liquidSideRailFixStyles">
+  .liquid-side-rail { top: 24px; transform: none; }
+  @media(max-width:700px){ .liquid-side-rail { top: auto; transform: translateX(-50%); } }
+</style>
+<script>
+  (function () {
+    var settingsButton = document.querySelector('#liquidSettingsButton');
+    var profileButton = document.querySelector('#liquidProfileButton');
+    if (!settingsButton) return;
+    settingsButton.onclick = function () {
+      var ids = ['budget', 'invest', 'lifetime', 'whatif', 'settings'];
+      ids.forEach(function (id) { var section = document.getElementById(id); if (section) section.classList.toggle('hidden', id !== 'settings'); });
+      document.querySelectorAll('.tab').forEach(function (tab) { tab.classList.remove('active'); });
+      var settingsTab = document.getElementById('settingsTab');
+      if (settingsTab) settingsTab.classList.add('active');
+      var profile = document.querySelector('.liquid-profile-card');
+      if (profile) profile.classList.add('hidden');
+      settingsButton.classList.add('active');
+      if (profileButton) profileButton.classList.remove('active');
+      if (typeof updateSettings === 'function') updateSettings();
+      window.scrollTo({top:0, behavior:'smooth'});
+    };
+  })();
+</script>
+<style>
+body.dark{--cream:#17172a;--ink:#f6f2ff;--muted:#b8b4cf;--line:#3a3655}body.dark .card,body.dark .panel,body.dark .calendar-panel,body.dark .notes-panel,body.dark .month,body.dark .ghost,body.dark .month-chip{background:#22213a;color:var(--ink)}body.dark input,body.dark textarea{background:#2b2946;color:var(--ink)}
+.settings-tools{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.setting-row{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--line)}.settings-tools input{display:block;width:100%;padding:11px;margin-top:7px;border:1px solid var(--line);border-radius:10px;font:inherit;color:var(--ink);background:#fff}.toggle{width:48px;height:27px;border:0;border-radius:20px;background:#d9d5cf;position:relative;cursor:pointer}.toggle:after{content:'';position:absolute;width:21px;height:21px;top:3px;left:3px;border-radius:50%;background:#fff;transition:.2s}.toggle.on{background:var(--orange)}.toggle.on:after{left:24px}.alert{margin:16px 0;padding:13px 15px;border-radius:12px;background:#fff0e7;color:#9b3d20;font-weight:700}.goal-track{height:10px;background:#f3eee8;border-radius:10px;overflow:hidden;margin:10px 0}.goal-track i{display:block;height:100%;background:linear-gradient(90deg,#ff6b35,#ffb000)}.mini-bars{display:flex;align-items:end;gap:8px;height:105px;margin-top:16px}.mini-bars span{flex:1;background:linear-gradient(180deg,#ffb000,#ff6b35);border-radius:7px 7px 2px 2px;min-height:5px;position:relative}.mini-bars small{position:absolute;top:calc(100% + 5px);left:50%;transform:translateX(-50%);font-size:10px;color:var(--muted)}@media(max-width:700px){.settings-tools{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+ s.limit=s.limit||0;s.goal=s.goal||{name:'',target:0,saved:0};s.recurring=s.recurring||[];
+ const ids=['budget','invest','lifetime','whatif','settings'];let baseShow=show,baseRender=render;
+ document.querySelector('.tabs').insertAdjacentHTML('beforeend','<button class="tab" id="settingsTab">Settings</button>');
+ document.querySelector('#settingsTab').onclick=function(){document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));this.classList.add('active');ids.forEach(x=>$(x).classList.add('hidden'));$('settings').classList.remove('hidden');updateSettings()};
+ show=function(id,b){$('settings').classList.add('hidden');baseShow(id,b)};
+ $('settings')||document.querySelector('main.wrap').insertAdjacentHTML('beforeend','<section id="settings" class="hidden"><div class="hero"><div><p class="eyebrow" style="color:#ffb15f">YOUR CONTROL CENTER</p><h2>Make it<br><span>fit you.</span></h2><p class="sub">Personalize Cosmic Budget and keep a backup of your plan.</p></div><div class="score">⚙<small>settings</small></div></div><section class="settings-tools"><article class="panel"><h3>Preferences</h3><div class="setting-row"><span><b>Dark mode</b><br><small class="muted">A calmer view at night</small></span><button id="darkToggle" class="toggle" onclick="toggleDark()"></button></div><label class="muted">Monthly spending limit<input id="limitInput" type="number" min="0" placeholder="Optional"></label><button class="btn" onclick="saveLimit()">Save limit</button></article><article class="panel"><h3>Savings goal</h3><label class="muted">Goal name<input id="goalName" placeholder="Emergency fund"></label><label class="muted">Target<input id="goalTarget" type="number" min="0"></label><label class="muted">Saved so far<input id="goalSaved" type="number" min="0"></label><button class="btn" onclick="saveGoal()">Save goal</button><div id="goalProgress"></div></article><article class="panel"><h3>Recurring expenses</h3><p class="muted">Add regular bills once, then add them to any month.</p><input id="recName" placeholder="Phone bill"><input id="recAmount" type="number" placeholder="Amount"><input id="recCategory" placeholder="Category"><button class="btn" onclick="addRecurring()">Add recurring item</button><div id="recurringList"></div><button class="ghost" onclick="applyRecurring()">Add due items this month</button></article><article class="panel"><h3>Data & insights</h3><p class="muted">Your data stays in this browser.</p><button class="btn" onclick="exportData()">Export backup</button> <button class="ghost" onclick="$('importFile').click()">Import backup</button><input id="importFile" type="file" accept="application/json" hidden onchange="importData(event)"><div id="trendChart"></div></article></section></section>');
+ function alertBox(){let b=$('budgetAlert');if(!b){b=document.createElement('div');b.id='budgetAlert';$('budget').insertBefore(b,$('budget').querySelector('.content'))}let spent=s.tx.filter(x=>(x[4]||selectedMonth)===selectedMonth&&!x[3]).reduce((a,x)=>a+x[1],0);b.className='alert';b.style.display=s.limit?'block':'none';b.textContent=s.limit?(spent>=s.limit?'Over limit by '+fmt(spent-s.limit):'Spending limit: '+fmt(s.limit)):''}
+ function investmentButtons(){document.querySelectorAll('#investments .row').forEach((r,i)=>{if(r.querySelector('.investment-actions'))return;let x=s.inv.slice().reverse()[i],a=document.createElement('span');a.className='investment-actions';a.innerHTML='<button class="ghost">Edit</button> <button class="ghost">Delete</button>';a.children[0].onclick=()=>editInv(s.inv.indexOf(x));a.children[1].onclick=()=>{if(confirm('Delete this contribution?')){s.inv.splice(s.inv.indexOf(x),1);save()}};r.appendChild(a)})}
+ function search(){let p=$('#activity').parentElement;if(!$('activitySearch')){let i=document.createElement('input');i.id='activitySearch';i.className='ghost';i.placeholder='Search activity…';i.style='width:100%;margin:12px 0';i.oninput=()=>document.querySelectorAll('#activity .row').forEach(r=>r.style.display=r.textContent.toLowerCase().includes(i.value.toLowerCase())?'flex':'none');p.insertBefore(i,$('#activity'))}}
+ window.editInv=function(i){let x=s.inv[i],n=prompt('Account or goal',x[0]);if(n===null)return;let a=Number(prompt('Amount',x[1]));if(n&&a){s.inv[i]=[n,a,x[2],x[3]];save()}};
+ window.toggleDark=function(){let on=!document.body.classList.contains('dark');document.body.classList.toggle('dark',on);localStorage.setItem('cosmic-budget-dark',on?'1':'0');$('darkToggle').classList.toggle('on',on)};
+ window.saveLimit=function(){s.limit=Number($('limitInput').value)||0;save();updateSettings()};window.saveGoal=function(){s.goal={name:$('goalName').value,target:Number($('goalTarget').value)||0,saved:Number($('goalSaved').value)||0};save();updateSettings()};
+ window.addRecurring=function(){let n=$('recName').value.trim(),a=Number($('recAmount').value),c=$('recCategory').value.trim()||'Other';if(n&&a){s.recurring.push([n,a,c]);save();updateSettings()}};window.applyRecurring=function(){s.recurring.forEach(r=>{if(!s.tx.some(x=>x[0]===r[0]&&x[4]===selectedMonth))s.tx.push([r[0],r[1],r[2],0,selectedMonth])});save();alert('Recurring items added for '+selectedMonth+'.')};
+ window.exportData=function(){let a=document.createElement('a'),b=new Blob([JSON.stringify({s,month:selectedMonth,notes:localStorage.getItem('cosmic-budget-notes')||''},null,2)],{type:'application/json'});a.href=URL.createObjectURL(b);a.download='cosmic-budget-backup.json';a.click()};window.importData=function(e){let r=new FileReader();r.onload=()=>{try{let d=JSON.parse(r.result);s=d.s;selectedMonth=d.month||selectedMonth;save();updateSettings();alert('Backup imported.')}catch(_){alert('Could not read that backup.')}};r.readAsText(e.target.files[0])};
+ window.updateSettings=function(){let g=s.goal;$('limitInput').value=s.limit||'';$('goalName').value=g.name||'';$('goalTarget').value=g.target||'';$('goalSaved').value=g.saved||'';let p=g.target?Math.min(100,g.saved/g.target*100):0;$('goalProgress').innerHTML=g.target?'<b>'+esc(g.name||'Savings goal')+'</b><div class="goal-track"><i style="width:'+p+'%"></i></div><span class="muted">'+fmt(g.saved)+' of '+fmt(g.target)+' ('+Math.round(p)+'%)</span>':'<p class="muted">Set a goal to see progress.</p>';document.body.classList.toggle('dark',localStorage.getItem('cosmic-budget-dark')==='1');$('darkToggle').classList.toggle('on',document.body.classList.contains('dark'));$('recurringList').innerHTML=s.recurring.map(r=>'<div class="row"><span>'+esc(r[0])+'</span><b>'+fmt(r[1])+'</b></div>').join('')||'<p class="muted">No recurring items yet.</p>';let vals=[];for(let i=-5;i<=0;i++){let d=new Date(selectedMonth+'-01T12:00:00');d.setMonth(d.getMonth()+i);let m=d.toISOString().slice(0,7),n=s.tx.filter(x=>x[4]===m&&!x[3]).reduce((a,x)=>a+x[1],0);vals.push({m,n})}let max=Math.max(...vals.map(x=>x.n),1);$('trendChart').innerHTML='<p class="muted">Six-month spending trend</p><div class="mini-bars">'+vals.map(x=>'<span style="height:'+Math.max(5,x.n/max*100)+'%"><small>'+x.m.slice(5)+'</small></span>').join('')+'</div>'};
+ render=function(){baseRender();alertBox();investmentButtons();search()};render();
+})();
+</script>
+<script>
+(function(){
+  var style=document.createElement('style');style.textContent='.phase3-outlook{margin-top:18px;background:linear-gradient(135deg,#fff 0%,#fff7ee 100%);border:1px solid #eee0d3;border-radius:22px;padding:22px;box-shadow:0 14px 34px #372b6b10}.phase3-outlook .outlook-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}.phase3-outlook h3{margin:0 0 5px;font-size:20px}.phase3-outlook .outlook-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}.phase3-metric{background:#fff;border:1px solid #eee7df;border-radius:16px;padding:14px}.phase3-metric span{display:block;color:#68708f;font-size:12px;font-weight:700}.phase3-metric strong{display:block;margin-top:6px;font-size:22px}.phase3-note{margin:16px 0 0;color:#68708f;line-height:1.45}.phase3-pill{white-space:nowrap;background:#fff0e7;color:#d84d22;border-radius:999px;padding:8px 11px;font-size:12px;font-weight:800}@media(max-width:700px){.phase3-outlook .outlook-head{flex-direction:column}.phase3-outlook .outlook-grid{grid-template-columns:1fr}}';document.head.appendChild(style);
+  var budget=document.querySelector('#budget');if(!budget||document.querySelector('#phase3Outlook'))return;var box=document.createElement('section');box.id='phase3Outlook';box.className='phase3-outlook';box.innerHTML='<div class="outlook-head"><div><h3>Monthly outlook</h3><div class="muted">A simple forecast from your current activity.</div></div><span id="phase3Pill" class="phase3-pill">Checking your plan</span></div><div class="outlook-grid"><div class="phase3-metric"><span>Projected spend</span><strong id="phase3Projected">$0.00</strong></div><div class="phase3-metric"><span>Safe weekly amount</span><strong id="phase3Weekly">$0.00</strong></div><div class="phase3-metric"><span>Days left</span><strong id="phase3Days">0</strong></div></div><p id="phase3Note" class="phase3-note">Your outlook will update as you log activity.</p>';var content=budget.querySelector('.content');if(content)budget.insertBefore(box,content);else budget.appendChild(box);
+  function money(n){return new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(Math.max(0,n||0))}function refresh(){var raw=localStorage.getItem('cosmic-budget-public'),data;try{data=raw?JSON.parse(raw):null}catch(e){data=null}var s=data&&data.s?data.s:{income:0,tx:[]},month=localStorage.getItem('cosmic-budget-month')||new Date().toISOString().slice(0,7),now=new Date(),chosen=new Date(month+'-01T12:00:00'),daysIn=new Date(chosen.getFullYear(),chosen.getMonth()+1,0).getDate(),same=now.getFullYear()===chosen.getFullYear()&&now.getMonth()===chosen.getMonth(),day=same?Math.min(daysIn,Math.max(1,now.getDate())):daysIn,spent=(s.tx||[]).filter(function(x){return (x[4]||month)===month&&!x[3]}).reduce(function(a,x){return a+Number(x[1]||0)},0),income=Number(s.income||0),available=Math.max(0,income-spent),projected=same?spent/day*daysIn:spent,left=Math.max(0,daysIn-day),weekly=left?available/(left/7):available;document.querySelector('#phase3Projected').textContent=money(projected);document.querySelector('#phase3Weekly').textContent=money(weekly);document.querySelector('#phase3Days').textContent=String(left);var pill=document.querySelector('#phase3Pill'),note=document.querySelector('#phase3Note');if(!income){pill.textContent='Add income to forecast';note.textContent='Once income is set, this outlook can estimate what remains safe to spend.'}else if(s.limit&&projected>Number(s.limit)){pill.textContent='Watch your pace';note.textContent='Your current pace is above the spending limit. Consider pausing optional purchases until the next month.'}else if(projected>income){pill.textContent='Needs attention';note.textContent='At this pace, spending may pass your income. Review recent activity or lower optional costs.'}else{pill.textContent='Plan looks steady';note.textContent='You have '+money(available)+' available after logged spending. Use the weekly amount as a gentle planning guide.'}}refresh();setInterval(refresh,1000);
+})();
+</script>
+<script id="liquidLateRepair">
+  (function () {
+    if (typeof s !== 'undefined') { s.recurring = s.recurring || []; s.goal = s.goal || {}; s.limit = Number(s.limit || 0); }
+    var preferences = document.querySelector('#settings .settings-tools .panel');
+    if (preferences && !document.querySelector('#liquidIntensity')) {
+      var control = document.createElement('div'); control.className = 'liquid-control';
+      control.innerHTML = '<div class="liquid-control-head"><b>Liquid Glass</b><span id="liquidIntensityValue" class="liquid-value">70%</span></div><p class="muted">Adjust how soft, frosted, and translucent the interface feels.</p><input id="liquidIntensity" type="range" min="0" max="100" value="70" aria-label="Liquid Glass intensity"><div class="liquid-range-labels"><span>Subtle</span><span>More liquid</span></div>';
+      preferences.appendChild(control);
+      var range=control.querySelector('#liquidIntensity'),value=control.querySelector('#liquidIntensityValue'),saved=Number(localStorage.getItem('cosmic-budget-liquid-intensity')); if(Number.isFinite(saved)) range.value=Math.max(0,Math.min(100,saved));
+      range.oninput=function(){var n=Number(range.value);document.documentElement.style.setProperty('--liquid-blur',(10+n*.2)+'px');document.documentElement.style.setProperty('--liquid-alpha',(.26+n*.0032));document.documentElement.style.setProperty('--liquid-shadow',(.08+n*.0011));value.textContent=n+'%';localStorage.setItem('cosmic-budget-liquid-intensity',String(n));}; range.oninput();
+    }
+    var settingsButton=document.querySelector('#liquidSettingsButton'); if(settingsButton) settingsButton.onclick=function(){['budget','invest','lifetime','whatif','settings'].forEach(function(id){var section=document.getElementById(id);if(section)section.classList.toggle('hidden',id!=='settings');});document.querySelectorAll('.tab').forEach(function(tab){tab.classList.remove('active');});var tab=document.getElementById('settingsTab');if(tab)tab.classList.add('active');var profile=document.querySelector('.liquid-profile-card');if(profile)profile.classList.add('hidden');settingsButton.classList.add('active');var p=document.querySelector('#liquidProfileButton');if(p)p.classList.remove('active');if(typeof updateSettings==='function')updateSettings();window.scrollTo({top:0,behavior:'smooth'});};
+  })();
+</script>
