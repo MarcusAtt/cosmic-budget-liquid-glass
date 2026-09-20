@@ -83,6 +83,22 @@ render();
     };
   })();
 </script>
+<section id="settings" class="hidden">
+  <div class="hero"><div><p class="eyebrow" style="color:#ffb15f">YOUR CONTROL CENTER</p><h2>Make it<br><span>fit you.</span></h2><p class="sub">Personalize your private budget.</p></div><div class="score">⚙<small>settings</small></div></div>
+  <section class="settings-tools">
+    <article class="panel"><h3>Preferences</h3><div class="setting-row"><span><b>Liquid Glass</b><br><small class="muted">Adjust the frosted interface</small></span><b id="staticIntensityValue" class="liquid-value">70%</b></div><input id="staticIntensity" type="range" min="0" max="100" value="70"><p class="muted">Slide right for a stronger glass effect.</p></article>
+    <article class="panel"><h3>Savings goal</h3><label class="muted">Goal name<input id="staticGoalName" placeholder="Emergency fund"></label><label class="muted">Target<input id="staticGoalTarget" type="number" min="0" placeholder="5000"></label><button class="btn" id="staticSaveGoal">Save goal</button><p id="staticGoalSaved" class="muted"></p></article>
+    <article class="panel"><h3>Data & insights</h3><p class="muted">Your entries stay in this browser.</p><button class="btn" id="staticExport">Export backup</button></article>
+  </section>
+</section>
+<script id="staticSettingsRepair">
+  (function(){
+    var section=document.getElementById('settings');
+    var range=document.getElementById('staticIntensity');
+    if(range){range.value=localStorage.getItem('cosmic-budget-liquid-intensity')||'70';range.oninput=function(){var n=Number(range.value);document.getElementById('staticIntensityValue').textContent=n+'%';document.documentElement.style.setProperty('--liquid-blur',(10+n*.2)+'px');document.documentElement.style.setProperty('--liquid-alpha',(.26+n*.0032));localStorage.setItem('cosmic-budget-liquid-intensity',String(n));};range.oninput();}
+    setTimeout(function(){var side=document.getElementById('liquidSettingsButton');if(side){side.onclick=function(){['budget','invest','lifetime','whatif','settings'].forEach(function(id){var e=document.getElementById(id);if(e)e.classList.toggle('hidden',id!=='settings');});side.classList.add('active');window.scrollTo(0,0);};}},0);
+  })();
+</script>
 
 <style id="liquidGlassPrototypeStyles">
   /* Local-only liquid glass prototype layer. Nothing here is published. */
