@@ -410,3 +410,34 @@ body.dark{--cream:#17172a;--ink:#f6f2ff;--muted:#b8b4cf;--line:#3a3655}body.dark
     var settingsButton=document.querySelector('#liquidSettingsButton'); if(settingsButton) settingsButton.onclick=function(){['budget','invest','lifetime','whatif','settings'].forEach(function(id){var section=document.getElementById(id);if(section)section.classList.toggle('hidden',id!=='settings');});document.querySelectorAll('.tab').forEach(function(tab){tab.classList.remove('active');});var tab=document.getElementById('settingsTab');if(tab)tab.classList.add('active');var profile=document.querySelector('.liquid-profile-card');if(profile)profile.classList.add('hidden');settingsButton.classList.add('active');var p=document.querySelector('#liquidProfileButton');if(p)p.classList.remove('active');if(typeof updateSettings==='function')updateSettings();window.scrollTo({top:0,behavior:'smooth'});};
   })();
 </script>
+<script id="settingsFallbackRepair">
+  (function () {
+    if (!document.getElementById('settings')) {
+      var section = document.createElement('section');
+      section.id = 'settings';
+      section.className = 'hidden';
+      section.innerHTML = '<div class="hero"><div><p class="eyebrow" style="color:#ffb15f">YOUR CONTROL CENTER</p><h2>Make it<br><span>fit you.</span></h2><p class="sub">Personalize your private budget.</p></div><div class="score">⚙<small>settings</small></div></div><section class="settings-tools"><article class="panel"><h3>Preferences</h3><div class="setting-row"><span><b>Liquid Glass</b><br><small class="muted">Adjust the frosted interface</small></span><b id="fallbackIntensityValue" class="liquid-value">70%</b></div><input id="fallbackIntensity" type="range" min="0" max="100" value="70"><p class="muted">Slide right for a stronger glass effect.</p></article><article class="panel"><h3>Savings goal</h3><label class="muted">Goal name<input id="fallbackGoalName" placeholder="Emergency fund"></label><label class="muted">Target<input id="fallbackGoalTarget" type="number" min="0" placeholder="5000"></label><button class="btn" id="fallbackSaveGoal">Save goal</button><p id="fallbackGoalSaved" class="muted"></p></article><article class="panel"><h3>Data & insights</h3><p class="muted">Your entries stay in this browser.</p><button class="btn" id="fallbackExport">Export backup</button></article></section>';
+      document.querySelector('main.wrap').appendChild(section);
+    }
+    var range = document.getElementById('fallbackIntensity');
+    if (range && !range.dataset.ready) {
+      range.dataset.ready = '1';
+      range.value = localStorage.getItem('cosmic-budget-liquid-intensity') || '70';
+      range.oninput = function () {
+        var n = Number(range.value);
+        document.getElementById('fallbackIntensityValue').textContent = n + '%';
+        document.documentElement.style.setProperty('--liquid-blur', (10 + n * .2) + 'px');
+        document.documentElement.style.setProperty('--liquid-alpha', (.26 + n * .0032));
+        localStorage.setItem('cosmic-budget-liquid-intensity', String(n));
+      };
+      range.oninput();
+    }
+    var button = document.getElementById('liquidSettingsButton');
+    if (button) button.onclick = function () {
+      ['budget','invest','lifetime','whatif','settings'].forEach(function (id) { var el = document.getElementById(id); if (el) el.classList.toggle('hidden', id !== 'settings'); });
+      button.classList.add('active');
+      var profile = document.querySelector('.liquid-profile-card'); if (profile) profile.classList.add('hidden');
+      window.scrollTo({top:0, behavior:'smooth'});
+    };
+  })();
+</script>
